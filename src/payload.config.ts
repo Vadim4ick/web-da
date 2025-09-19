@@ -1,4 +1,3 @@
-// storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -6,9 +5,11 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { en } from '@payloadcms/translations/languages/en'
+import { ru } from '@payloadcms/translations/languages/ru'
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { Users } from './shared/collections/Users'
+import { Media } from './shared/collections/Media'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -19,6 +20,14 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+  },
+  i18n: {
+    fallbackLanguage: 'ru',
+    supportedLanguages: { en, ru },
+  },
+  localization: {
+    locales: ['en', 'ru'],
+    defaultLocale: 'ru',
   },
   collections: [Users, Media],
   editor: lexicalEditor(),
