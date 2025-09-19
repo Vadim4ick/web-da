@@ -15,13 +15,24 @@ const Home = async () => {
     slug: 'about',
   })
 
+  const casesItems = await payload.find({
+    collection: 'cases',
+    limit: 5,
+    select: {
+      title: true,
+      description: true,
+      mainImage: true,
+      tags: true,
+    },
+  })
+
   return (
     <>
       <Banner />
 
       <AboutInfo servicesItems={servicesItems.docs} aboutInfo={aboutInfo} />
 
-      <OurCases />
+      <OurCases cases={casesItems.docs} />
       <BannerSend />
     </>
   )
