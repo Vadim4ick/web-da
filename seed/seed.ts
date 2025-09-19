@@ -1,5 +1,6 @@
 import { clearSeeds } from './data/_clear'
 import { seedAbout } from './data/about'
+import { seedCases } from './data/cases'
 
 export const seed = async () => {
   console.log('🌱 Запуск сидеров...')
@@ -11,6 +12,7 @@ export const seed = async () => {
   await clearSeeds()
 
   await seedAbout()
+  await seedCases()
 
   console.log('✅ Сидеры завершены.')
 }

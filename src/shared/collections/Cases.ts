@@ -1,3 +1,11 @@
+import {
+  BoldFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  lexicalEditor,
+  OrderedListFeature,
+  UnorderedListFeature,
+} from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
 
 export const Cases: CollectionConfig = {
@@ -5,6 +13,9 @@ export const Cases: CollectionConfig = {
   labels: {
     singular: 'Кейс',
     plural: 'Кейсы',
+  },
+  admin: {
+    useAsTitle: 'title',
   },
   access: {
     read: () => true,
@@ -32,6 +43,7 @@ export const Cases: CollectionConfig = {
       name: 'tags',
       type: 'array',
       label: 'Теги',
+      labels: { singular: 'Тег', plural: 'Теги' },
       fields: [
         {
           name: 'tag',
@@ -45,13 +57,23 @@ export const Cases: CollectionConfig = {
     {
       name: 'items',
       type: 'array',
-      label: 'Список задач',
+      label: 'Информационные блоки',
+      labels: { singular: 'Блок', plural: 'Блоки' },
       fields: [
         {
           name: 'text',
           type: 'richText',
           required: true,
           label: 'Текст задачи',
+          editor: lexicalEditor({
+            features: () => [
+              HeadingFeature({ enabledHeadingSizes: ['h2'] }),
+              BoldFeature(),
+              FixedToolbarFeature(),
+              UnorderedListFeature(),
+              OrderedListFeature(),
+            ],
+          }),
         },
       ],
     },
@@ -60,7 +82,7 @@ export const Cases: CollectionConfig = {
     {
       name: 'blocks',
       type: 'array',
-      label: 'Блоки',
+      label: 'Блоки контента',
       fields: [
         {
           name: 'title',
