@@ -1,13 +1,20 @@
-"use client";
+'use client'
 
-import { Container } from "@/shared/ui/container";
-import { about, advantages, services } from "../model/const";
-import { AboutServicesCard } from "./AboutServicesCard";
-import { useMediaQuery } from "@/shared/hooks/useMedia";
-import { cn } from "@/shared/lib/utils";
+import { Container } from '@/shared/ui/container'
+import { advantages, services } from '../model/const'
+import { AboutServicesCard } from './AboutServicesCard'
+import { useMediaQuery } from '@/shared/hooks/useMedia'
+import { cn } from '@/shared/lib/utils'
+import { About, Service } from '@/payload-types'
 
-const AboutInfo = () => {
-  const isTablet = useMediaQuery(991);
+const AboutInfo = ({
+  servicesItems,
+  aboutInfo,
+}: {
+  servicesItems: Service[]
+  aboutInfo: About
+}) => {
+  const isTablet = useMediaQuery(991)
 
   return (
     <section className="max-tablet:py-[64px] max-tablet:rounded-[20px] max-tablet:gap-[96px] max-mobile:gap-[80px] mb-[120px] flex flex-col gap-[160px] rounded-[40px] bg-white py-[120px]">
@@ -15,30 +22,34 @@ const AboutInfo = () => {
         <div className="max-tablet:gap-[48px] flex flex-col gap-[80px]">
           <div className="max-mobile:gap-3 flex flex-col items-center justify-center gap-4">
             <h3 className="text-primary-black max-mobile:text-[32px] text-center text-[48px] leading-[125%] font-semibold">
-              {about.title}
+              {aboutInfo.title}
             </h3>
 
-            <p className="font-raleway text-additional-grey-50 max-mobile:text-[16px] max-tablet:text-additional-grey-60 max-w-[582px] text-center text-[18px] leading-[130%] font-medium">
-              {about.desc}
-            </p>
+            {aboutInfo.description && (
+              <p className="font-raleway text-additional-grey-50 max-mobile:text-[16px] max-tablet:text-additional-grey-60 max-w-[582px] text-center text-[18px] leading-[130%] font-medium">
+                {aboutInfo.description}
+              </p>
+            )}
           </div>
 
-          <div className="about-grid">
-            {about.items.map((item) => (
-              <article
-                key={item.id}
-                className="bg-additional-grey-cold max-tablet:gap-[20px] max-mobile:gap-[36px] max-mobile:px-[28px] max-mobile:py-[24px] flex flex-col gap-12 rounded-[12px] px-[36px] py-[32px]"
-              >
-                <h4 className="text-primary-blue max-mobile:text-[24px] text-[32px] leading-[125%] font-semibold">
-                  {item.title}
-                </h4>
+          {aboutInfo.items && (
+            <div className="about-grid">
+              {aboutInfo.items.map((item) => (
+                <article
+                  key={item.id}
+                  className="bg-additional-grey-cold max-tablet:gap-[20px] max-mobile:gap-[36px] max-mobile:px-[28px] max-mobile:py-[24px] flex flex-col gap-12 rounded-[12px] px-[36px] py-[32px]"
+                >
+                  <h4 className="text-primary-blue max-mobile:text-[24px] text-[32px] leading-[125%] font-semibold">
+                    {item.title}
+                  </h4>
 
-                <p className="font-raleway max-mobile:text-[14px] text-additional-grey-50 text-[18px] leading-[130%] font-medium">
-                  {item.desc}
-                </p>
-              </article>
-            ))}
-          </div>
+                  <p className="font-raleway max-mobile:text-[14px] text-additional-grey-50 text-[18px] leading-[130%] font-medium">
+                    {item.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </Container>
 
@@ -81,23 +92,23 @@ const AboutInfo = () => {
 
           <div
             className={cn(
-              "max-tablet:flex max-tablet:items-start max-tablet:gap-4 max-tablet:overflow-auto max-mobile:flex-col max-mobile:gap-3 pr-4",
+              'max-tablet:flex max-tablet:items-start max-tablet:gap-4 max-tablet:overflow-auto max-mobile:flex-col max-mobile:gap-3 pr-4',
               {
-                "about-grid": !isTablet,
+                'about-grid': !isTablet,
               },
             )}
           >
-            {services.items.map((item, idx) => (
+            {servicesItems.map((item, idx) => (
               <AboutServicesCard key={item.id} item={item} idx={idx} />
             ))}
           </div>
         </div>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export { AboutInfo };
+export { AboutInfo }
 
 {
   /* <article
