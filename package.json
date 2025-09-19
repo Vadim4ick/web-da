@@ -15,7 +15,12 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --no-experimental-strip-types\" pnpm exec playwright test",
-    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
+    "seed": "tsx seed/scripts/index.ts",
+    "check-types": "tsc --noEmit",
+    "migrate:create": "npm run payload migrate:create",
+    "migrate:up": "npm run payload migrate",
+    "migrate:status": "npm run payload migrate:status"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.56.0",

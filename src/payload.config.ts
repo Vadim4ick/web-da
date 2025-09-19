@@ -11,6 +11,12 @@ import { ru } from '@payloadcms/translations/languages/ru'
 import { Users } from './shared/collections/Users'
 import { Media } from './shared/collections/Media'
 import { Cases } from './shared/collections/Cases'
+import { About } from './shared/collections/About'
+import { Services } from './shared/collections/Services'
+
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,8 +24,15 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+
+    components: {
+      graphics: {
+        Logo: '@/app/(payload)/components/Logo.tsx',
+      },
     },
 
     meta: {
@@ -42,7 +55,8 @@ export default buildConfig({
     locales: ['en', 'ru'],
     defaultLocale: 'ru',
   },
-  collections: [Users, Media, Cases],
+  collections: [Users, Media, Cases, Services],
+  globals: [About],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
