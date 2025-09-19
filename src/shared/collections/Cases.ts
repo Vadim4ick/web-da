@@ -1,0 +1,119 @@
+import type { CollectionConfig } from 'payload'
+
+export const Cases: CollectionConfig = {
+  slug: 'cases',
+  labels: {
+    singular: 'Кейс',
+    plural: 'Кейсы',
+  },
+  access: {
+    read: () => true,
+  },
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      label: 'Заголовок',
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      label: 'Описание',
+    },
+    {
+      name: 'mainImage',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Главное изображение',
+      required: true,
+    },
+    {
+      name: 'tags',
+      type: 'array',
+      label: 'Теги',
+      fields: [
+        {
+          name: 'tag',
+          type: 'text',
+          required: true,
+          label: 'Тег',
+        },
+      ],
+    },
+
+    {
+      name: 'items',
+      type: 'array',
+      label: 'Список задач',
+      fields: [
+        {
+          name: 'text',
+          type: 'richText',
+          required: true,
+          label: 'Текст задачи',
+        },
+      ],
+    },
+
+    // 🔹 Блоки "Заголовок + картинка"
+    {
+      name: 'blocks',
+      type: 'array',
+      label: 'Блоки',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          label: 'Заголовок блока',
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Картинка',
+        },
+      ],
+    },
+  ],
+}
+
+// {
+//   name: 'contentBlocks',
+//   type: 'blocks',
+//   label: 'Контентные блоки',
+//   blocks: [
+//     {
+//       slug: 'tasks',
+//       labels: { singular: 'Задачи', plural: 'Задачи' },
+//       fields: [
+//         {
+//           name: 'title',
+//           type: 'text',
+//           label: 'Заголовок блока',
+//           defaultValue: 'Задачи',
+//         },
+//         {
+//           name: 'items',
+//           type: 'array',
+//           label: 'Список задач',
+//           fields: [{ name: 'text', type: 'richText', label: 'Текст задачи' }],
+//         },
+//       ],
+//     },
+
+//     {
+//       slug: 'headlineWithImage',
+//       labels: { singular: 'Заголовок + Картинка', plural: 'Заголовки + Картинки' },
+//       fields: [
+//         { name: 'title', type: 'text', label: 'Заголовок' },
+//         {
+//           name: 'image',
+//           type: 'upload',
+//           relationTo: 'media',
+//           label: 'Картинка',
+//         },
+//       ],
+//     },
+//   ],
+// },
