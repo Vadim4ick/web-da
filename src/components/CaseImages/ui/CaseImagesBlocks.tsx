@@ -1,13 +1,14 @@
-import { CaseImagesBlock } from "./CaseImagesBlock";
+import { CaseBlock } from '@/shared/types/cases.type'
+import { CaseImagesBlock } from './CaseImagesBlock'
 
-const CaseImagesBlocks = () => {
+const CaseImagesBlocks = ({ caseBlocks }: { caseBlocks: CaseBlock[] }) => {
   return (
     <div className="flex flex-col gap-[20px]">
-      <CaseImagesBlock />
-      <CaseImagesBlock />
-      <CaseImagesBlock />
+      {caseBlocks.map((block) => (
+        <CaseImagesBlock key={block.id} caseBlock={block} />
+      ))}
     </div>
-  );
-};
+  )
+}
 
-export { CaseImagesBlocks };
+export { CaseImagesBlocks }

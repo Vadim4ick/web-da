@@ -83,6 +83,11 @@ export const Cases: CollectionConfig = {
       name: 'blocks',
       type: 'array',
       label: 'Блоки контента',
+      admin: {
+        components: {
+          RowLabel: '@/app/(payload)/components/ArrayRowLabel.tsx',
+        },
+      },
       fields: [
         {
           name: 'title',
