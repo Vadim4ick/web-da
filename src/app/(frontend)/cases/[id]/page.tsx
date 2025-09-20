@@ -67,7 +67,7 @@ const PageCase = async ({ params }: { params: Promise<{ id: string }> }) => {
         )}
       </Container>
 
-      <CaseImagesBlocks />
+      {caseEl.blocks && <CaseImagesBlocks caseBlocks={caseEl.blocks} />}
 
       <Container>
         <BannerSend className="max-tablet:py-[128px] max-mobile:py-[128px] py-[160px]" />
