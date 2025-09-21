@@ -20,15 +20,17 @@ const Home = async () => {
         tags: true,
       },
     }),
+    payload.find({ collection: 'banner' }),
   ])
 
   const servicesItems = results[0].status === 'fulfilled' ? results[0].value : null
   const aboutInfo = results[1].status === 'fulfilled' ? results[1].value : null
   const casesItems = results[2].status === 'fulfilled' ? results[2].value : null
+  const banners = results[3].status === 'fulfilled' ? results[3].value : null
 
   return (
     <>
-      <Banner />
+      {banners && <Banner banners={banners.docs} />}
 
       {servicesItems && aboutInfo && (
         <AboutInfo servicesItems={servicesItems?.docs} aboutInfo={aboutInfo} />
