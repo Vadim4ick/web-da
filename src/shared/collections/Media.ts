@@ -6,6 +6,9 @@ export const Media: CollectionConfig = {
     singular: 'Изображение',
     plural: 'Изображения',
   },
+  admin: {
+    group: 'Медиа',
+  },
   access: {
     read: () => true,
   },
