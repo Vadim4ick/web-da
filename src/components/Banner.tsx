@@ -1,29 +1,29 @@
-"use client";
+'use client'
 
-import { Button } from "@/shared/ui/button";
-import { Container } from "@/shared/ui/container";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Button } from '@/shared/ui/button'
+import { Container } from '@/shared/ui/container'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination } from 'swiper/modules'
 
-import "swiper/css";
-import "swiper/css/pagination";
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 const slider = [
   {
     id: 1,
-    img: "/2.png",
-    title: "Создаём современные, функциональные и привлекательные сайты",
+    img: '/2.png',
+    title: 'Создаём современные, функциональные и привлекательные сайты',
     subtitle:
-      " Каждый проект разрабатывается индивидуально, с учетом специфики вашего бизнеса и ваших целей",
+      ' Каждый проект разрабатывается индивидуально, с учетом специфики вашего бизнеса и ваших целей',
   },
   {
     id: 2,
-    img: "/1.png",
-    title: "Создаём современные, функциональные и привлекательные сайты",
+    img: '/1.png',
+    title: 'Создаём современные, функциональные и привлекательные сайты',
     subtitle:
-      " Каждый проект разрабатывается индивидуально, с учетом специфики вашего бизнеса и ваших целей",
+      ' Каждый проект разрабатывается индивидуально, с учетом специфики вашего бизнеса и ваших целей',
   },
-];
+]
 
 const Banner = () => {
   return (
@@ -57,7 +57,15 @@ const Banner = () => {
                 </div>
 
                 {/* Картинка */}
-                <div className="tablet:w-1/2 max-tablet:justify-end max-tablet:w-full max-tablet:left-1/2 max-tablet:-translate-x-1/2 absolute right-0 bottom-0 flex h-full items-end">
+                {/* <div className="tablet:w-1/2 max-tablet:justify-end max-tablet:w-full max-tablet:left-1/2 max-tablet:-translate-x-1/2 absolute right-0 bottom-0 flex h-full items-end">
+                  <img
+                    src={item.img}
+                    alt="slide"
+                    className="max-tablet:max-h-[530px] max-tablet:object-cover max-tablet:h-[450px]"
+                  />
+                </div> */}
+
+                <div className="tablet:w-full tablet:max-w-[815px] max-tablet:justify-end max-tablet:w-full max-tablet:left-1/2 max-tablet:-translate-x-1/2 absolute right-0 bottom-0 flex h-full items-end">
                   <img
                     src={item.img}
                     alt="slide"
@@ -70,7 +78,7 @@ const Banner = () => {
         </Swiper>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export { Banner };
+export { Banner }

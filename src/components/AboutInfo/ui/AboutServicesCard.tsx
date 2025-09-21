@@ -75,11 +75,11 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
               transition={{ duration: 0.45, ease: 'easeInOut' }}
               className="flex flex-col gap-1 overflow-hidden"
             >
-              <div className="text-primary-black bg-additional-grey-cold flex flex-col gap-1.5 px-[36px] py-[32px] text-[14px]">
+              <div className="text-primary-black max-mobile:py-[24px] max-mobile:px-[28px] bg-additional-grey-cold flex flex-col gap-1.5 px-[36px] py-[32px] text-[14px]">
                 {item.extras.map((extra) => (
                   <div
                     key={extra.id}
-                    className="font-raleway flex justify-between text-[16px] leading-[130%] font-semibold"
+                    className="font-raleway max-mobile:text-[12px] flex justify-between text-[16px] leading-[130%] font-semibold"
                   >
                     <span>{extra?.name}</span>
                     <span>{extra?.price}</span>
@@ -87,7 +87,7 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
                 ))}
               </div>
 
-              <Button className="font-montserrat h-[60px] w-full rounded-t-[0px] rounded-b-[20px] text-[16px] leading-[20px]">
+              <Button className="font-montserrat max-mobile:h-[54px] max-mobile:text-[14px] h-[60px] w-full rounded-t-[0px] rounded-b-[20px] text-[16px] leading-[20px]">
                 Заказать
               </Button>
             </motion.div>
