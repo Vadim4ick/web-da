@@ -16,6 +16,7 @@ export const Cases: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+    group: 'Контент',
   },
   access: {
     read: () => true,

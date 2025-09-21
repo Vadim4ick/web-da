@@ -6,6 +6,9 @@ export const About: GlobalConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    group: 'Контент',
+  },
   fields: [
     {
       name: 'title',

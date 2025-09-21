@@ -15,6 +15,7 @@ import { About } from './shared/collections/About'
 import { Services } from './shared/collections/Services'
 
 import dotenv from 'dotenv'
+import { Banner } from './shared/collections/Banner'
 
 dotenv.config()
 
@@ -55,7 +56,7 @@ export default buildConfig({
     locales: ['en', 'ru'],
     defaultLocale: 'ru',
   },
-  collections: [Users, Media, Cases, Services],
+  collections: [Users, Media, Cases, Services, Banner],
   globals: [About],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
