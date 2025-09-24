@@ -1,4 +1,10 @@
-export const navbar = [
+export type NavbarItem = {
+  name: string
+  anchorId?: string
+  path?: string
+}
+
+export const navbar: NavbarItem[] = [
   {
     name: 'О нас',
     anchorId: 'about',
@@ -13,7 +19,7 @@ export const navbar = [
   },
   {
     name: 'Наши кейсы',
-    anchorId: 'cases',
+    path: '/cases',
   },
   {
     name: 'Контакты',
