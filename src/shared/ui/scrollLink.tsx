@@ -37,17 +37,27 @@ export const ScrollLink = ({
   to,
   children,
   className,
+  onClick,
 }: {
   to: string
   children: React.ReactNode
   className?: string
+  onClick?: () => void
 }) => {
   const pathname = usePathname()
 
   // Если мы на главной → плавный scroll
   if (pathname === '/') {
     return (
-      <Scroll to={to} smooth={true} duration={800} offset={-100} spy={true} className={className}>
+      <Scroll
+        onClick={onClick}
+        to={to}
+        smooth={true}
+        duration={800}
+        offset={-100}
+        spy={true}
+        className={className}
+      >
         {children}
       </Scroll>
     )
@@ -55,7 +65,7 @@ export const ScrollLink = ({
 
   // Если мы НЕ на главной → переход на "/#to"
   return (
-    <NextLink href={`/#${to}`} className={className}>
+    <NextLink onClick={onClick} href={`/#${to}`} className={className}>
       {children}
     </NextLink>
   )
