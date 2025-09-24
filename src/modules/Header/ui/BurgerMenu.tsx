@@ -35,7 +35,10 @@ export const BurgerMenu = () => {
               Навигация
             </p>
 
-            <Navbar className="max-tablet:gap-4 flex flex-col" />
+            <Navbar
+              onCloseBurger={() => setOpen(false)}
+              className="max-tablet:gap-4 flex flex-col"
+            />
           </div>
 
           <div className="flex flex-col gap-12">
