@@ -4,6 +4,8 @@ import { BannerSend } from '@/components/BannerSend'
 import { OurCases } from '@/components/OurCases'
 import { getPayloadClient } from '@/shared/lib/payloadClient'
 
+export const revalidate = 60
+
 const Home = async () => {
   const payload = await getPayloadClient()
 
