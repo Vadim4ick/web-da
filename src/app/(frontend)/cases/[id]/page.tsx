@@ -5,6 +5,8 @@ import { Container } from '@/shared/ui/container'
 import RichText from '@/shared/ui/rich-text'
 import { notFound } from 'next/navigation'
 
+export const revalidate = 60
+
 const PageCase = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
 
