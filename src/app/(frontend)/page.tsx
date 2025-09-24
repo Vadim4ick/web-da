@@ -2,6 +2,7 @@ import { AboutInfo } from '@/components/AboutInfo'
 import { Banner } from '@/components/Banner'
 import { BannerSend } from '@/components/BannerSend'
 import { OurCases } from '@/components/OurCases'
+import { HashScroller } from '@/shared/lib/HashScroller'
 import { getPayloadClient } from '@/shared/lib/payloadClient'
 
 export const revalidate = 60
@@ -40,6 +41,8 @@ const Home = async () => {
 
       {casesItems && <OurCases cases={casesItems.docs} />}
       <BannerSend />
+
+      <HashScroller />
     </>
   )
 }
