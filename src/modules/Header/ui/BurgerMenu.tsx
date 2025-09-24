@@ -1,34 +1,25 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Navbar } from "./Navbar";
-import { Button } from "@/shared/ui/button";
-import { BurgerMenuIcon } from "@/shared/icons/BurgerMenuIcon";
-import { CloseIcon } from "@/shared/icons/CloseIcon";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu";
-import { social } from "@/shared/const/const";
+import { useState } from 'react'
+import { Navbar } from './Navbar'
+import { Button } from '@/shared/ui/button'
+import { BurgerMenuIcon } from '@/shared/icons/BurgerMenuIcon'
+import { CloseIcon } from '@/shared/icons/CloseIcon'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/shared/ui/dropdown-menu'
+import { social } from '@/shared/const/const'
+import { ScrollLink } from '@/shared/ui/scrollLink'
 
 export const BurgerMenu = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild className="border-none outline-none">
         <button
-          className={
-            "tablet:hidden bg-additional-grey-cold burger rounded-[12px] p-[11px]"
-          }
+          className={'tablet:hidden bg-additional-grey-cold burger rounded-[12px] p-[11px]'}
           aria-label="Открыть меню"
         >
-          {open ? (
-            <CloseIcon width={18} height={18} />
-          ) : (
-            <BurgerMenuIcon width={18} height={18} />
-          )}
+          {open ? <CloseIcon width={18} height={18} /> : <BurgerMenuIcon width={18} height={18} />}
         </button>
       </DropdownMenuTrigger>
 
@@ -53,9 +44,9 @@ export const BurgerMenu = () => {
                 <li key={item.id}>
                   <a
                     href={
-                      item.id === "mail"
+                      item.id === 'mail'
                         ? `mailto:${item.link}`
-                        : item.id === "phone"
+                        : item.id === 'phone'
                           ? `tel:${item.link}`
                           : item.link
                     }
@@ -68,13 +59,16 @@ export const BurgerMenu = () => {
             </ul>
 
             <div className="flex items-center justify-center">
-              <Button className="w-full max-w-[190px] py-[14px]">
-                Отправить заявку
-              </Button>
+              <ScrollLink
+                to={'contacts'}
+                className="flex h-full w-full items-center justify-center"
+              >
+                <Button className="w-full max-w-[190px] py-[14px]">Отправить заявку</Button>
+              </ScrollLink>
             </div>
           </div>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-};
+  )
+}

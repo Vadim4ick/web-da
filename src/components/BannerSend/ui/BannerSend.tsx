@@ -39,7 +39,10 @@ const BannerSend = ({ className }: { className?: string }) => {
   }
 
   return (
-    <section className={cn('max-tablet:pb-[128px] max-mobile:pb-[96px] pb-[160px]', className)}>
+    <section
+      id="contacts"
+      className={cn('max-tablet:pb-[128px] max-mobile:pb-[96px] pb-[160px]', className)}
+    >
       <Container>
         <div className="bg-primary-blue max-mobile:flex-col max-mobile:gap-6 max-mobile:py-8 max-mobile:px-2 flex h-full justify-between rounded-[20px]">
           <div className="max-tablet:m-[32px] max-mobile:px-3 max-mobile:max-w-full max-mobile:m-0 max-tablet:max-w-[292px] m-[60px] flex max-w-[486px] flex-col justify-between gap-[32px]">

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { ArrowBottom } from '@/shared/icons/ArrowBottom'
 import { useMediaQuery } from '@/shared/hooks/useMedia'
 import { Service } from '@/payload-types'
+import { ScrollLink } from '@/shared/ui/scrollLink'
 
 export function AboutServicesCard({ item, idx }: { item: Service; idx: number }) {
   const isTablet = useMediaQuery(991)
@@ -87,9 +88,11 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
                 ))}
               </div>
 
-              <Button className="font-montserrat max-mobile:h-[54px] max-mobile:text-[14px] h-[60px] w-full rounded-t-[0px] rounded-b-[20px] text-[16px] leading-[20px]">
-                Заказать
-              </Button>
+              <ScrollLink to={'contacts'}>
+                <Button className="font-montserrat max-mobile:h-[54px] max-mobile:text-[14px] h-[60px] w-full rounded-t-[0px] rounded-b-[20px] text-[16px] leading-[20px]">
+                  Заказать
+                </Button>
+              </ScrollLink>
             </motion.div>
           )}
         </AnimatePresence>
