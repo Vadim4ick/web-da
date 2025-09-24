@@ -4,10 +4,14 @@ import { Button } from '@/shared/ui/button'
 import Image from 'next/image'
 import { cn } from '@/shared/lib/utils'
 import { CasesHomePage } from '@/shared/types/cases.type'
+import { ScrollLink } from '@/shared/ui/scrollLink'
 
 const OurCases = ({ className, cases }: { className?: string; cases: CasesHomePage[] }) => {
   return (
-    <section className={cn('max-tablet:pb-[128px] max-mobile:pb-[96px] pb-[160px]', className)}>
+    <section
+      id="cases"
+      className={cn('max-tablet:pb-[128px] max-mobile:pb-[96px] pb-[160px]', className)}
+    >
       <Container className="max-tablet:gap-12 flex flex-col items-center gap-[80px]">
         <h2 className="text-primary-black max-mobile:text-[32px] max-mobile:leading-[110%] text-[48px] leading-[125%] font-semibold">
           Наши кейсы
@@ -62,9 +66,11 @@ const OurCases = ({ className, cases }: { className?: string; cases: CasesHomePa
           ))}
 
           <div className="max-mobile:mt-6 flex items-center justify-center">
-            <Button className="max-tablet:max-w-[195px] max-tablet:max-h-[52px] max-tablet:text-[16px] max-tablet:leading-[20px] h-full max-h-[62px] w-full max-w-[227px] rounded-[100px] text-[18px] leading-[22px] font-bold">
-              Заказать проект
-            </Button>
+            <ScrollLink to={'contacts'} className="flex h-full w-full items-center justify-center">
+              <Button className="max-tablet:max-w-[195px] max-mobile:max-w-[160px] max-mobile:h-[46px] max-tablet:max-h-[52px] max-mobile:text-[14px] max-mobile:leading-[18px] max-tablet:text-[16px] max-tablet:leading-[20px] h-full max-h-[62px] w-full max-w-[227px] rounded-[100px] text-[18px] leading-[22px] font-bold">
+                Заказать проект
+              </Button>
+            </ScrollLink>
           </div>
         </div>
       </Container>

@@ -1,42 +1,42 @@
 export const navbar = [
   {
-    name: "О нас",
-    path: "/about",
+    name: 'О нас',
+    anchorId: 'about',
   },
   {
-    name: "Преимущества",
-    path: "/advantages",
+    name: 'Преимущества',
+    anchorId: 'advantages',
   },
   {
-    name: "Услуги",
-    path: "/services",
+    name: 'Услуги',
+    anchorId: 'services',
   },
   {
-    name: "Наши кейсы",
-    path: "/cases",
+    name: 'Наши кейсы',
+    anchorId: 'cases',
   },
   {
-    name: "Контакты",
-    path: "/contacts",
+    name: 'Контакты',
+    anchorId: 'contacts',
   },
-];
+]
 
-type Social = "tg" | "mail" | "phone";
+type Social = 'tg' | 'mail' | 'phone'
 
 export const social: { id: Social; name: string; link: string }[] = [
   {
-    id: "tg",
-    name: "Telegram",
-    link: "https://t.me/da_web",
+    id: 'tg',
+    name: 'Telegram',
+    link: 'https://t.me/da_web',
   },
   {
-    id: "mail",
-    name: "web-da@mail.ru",
-    link: "web-da@mail.ru",
+    id: 'mail',
+    name: 'web-da@mail.ru',
+    link: 'web-da@mail.ru',
   },
   {
-    id: "phone",
-    name: "Telegram",
-    link: "8 (989) 292-07-17",
+    id: 'phone',
+    name: 'Telegram',
+    link: '8 (989) 292-07-17',
   },
-];
+]

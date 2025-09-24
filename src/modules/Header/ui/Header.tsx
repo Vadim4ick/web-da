@@ -1,9 +1,10 @@
-import { Logo } from "@/shared/icons/Logo";
-import { Button } from "@/shared/ui/button";
-import { Container } from "@/shared/ui/container";
-import Link from "next/link";
-import { Navbar } from "./Navbar";
-import { BurgerMenu } from "./BurgerMenu";
+import { Logo } from '@/shared/icons/Logo'
+import { Button } from '@/shared/ui/button'
+import { Container } from '@/shared/ui/container'
+import Link from 'next/link'
+import { Navbar } from './Navbar'
+import { BurgerMenu } from './BurgerMenu'
+import { ScrollLink } from '@/shared/ui/scrollLink'
 
 const Header = () => {
   return (
@@ -16,13 +17,15 @@ const Header = () => {
 
           <Navbar className="max-tablet:hidden" />
 
-          <Button className="max-tablet:hidden">Отправить заявку</Button>
+          <ScrollLink to={'contacts'} className="max-tablet:hidden">
+            <Button>Отправить заявку</Button>
+          </ScrollLink>
 
           <BurgerMenu />
         </div>
       </Container>
     </header>
-  );
-};
+  )
+}
 
-export { Header };
+export { Header }

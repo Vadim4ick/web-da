@@ -9,6 +9,7 @@ import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Banner as TBanner } from '@/payload-types'
+import { ScrollLink } from '@/shared/ui/scrollLink'
 
 // const slider = [
 //   {
@@ -62,9 +63,11 @@ const Banner = ({ banners }: { banners: TBanner[] }) => {
                     )}
                   </div>
 
-                  <Button className="text-primary-blue max-tablet:h-[46px] max-tablet:max-w-[160px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[66px] w-full max-w-[211px] rounded-[100px] bg-white text-[16px] leading-[22px] font-semibold hover:bg-[#E8F4FF]">
-                    Заказать сайт
-                  </Button>
+                  <ScrollLink to={'contacts'} className="max-tablet:w-[160px] w-full max-w-[221px]">
+                    <Button className="text-primary-blue max-tablet:h-[46px] max-tablet:max-w-[160px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[66px] w-full rounded-[100px] bg-white text-[16px] leading-[22px] font-semibold hover:bg-[#E8F4FF]">
+                      Заказать сайт
+                    </Button>
+                  </ScrollLink>
                 </div>
 
                 {/* Картинка */}
