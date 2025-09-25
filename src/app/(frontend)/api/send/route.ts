@@ -41,6 +41,17 @@ export async function POST(req: Request) {
 
     await transporter.sendMail(mailOptions)
 
+    const tgMessage = `📩 Новая заявка:\n\n👤 Имя: ${name}\n 📱 Телефон: ${phone}\n 💬 Комментарий: ${comment || '—'}`
+    await fetch(`https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: process.env.TG_CHAT_ID, // 👈 ID группы
+        text: tgMessage,
+        parse_mode: 'Markdown',
+      }),
+    })
+
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Ошибка при отправке письма:', error)
