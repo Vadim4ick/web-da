@@ -19,6 +19,8 @@ import {
   DialogTitle,
 } from '@/shared/ui/dialog'
 
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+
 // схема валидации
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Имя должно содержать минимум 2 буквы' }),
@@ -34,6 +36,7 @@ const formSchema = z.object({
 const BannerSend = ({ className }: { className?: string }) => {
   const [sendSuccess, setSendSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,11 +50,19 @@ const BannerSend = ({ className }: { className?: string }) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true)
+
+    if (!executeRecaptcha) {
+      console.error('Не удалось инициализировать капчу')
+      return
+    }
+
     try {
+      const token = await executeRecaptcha('feedback_form')
+
       const res = await fetch('/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, token }),
       })
 
       if (res.ok) {

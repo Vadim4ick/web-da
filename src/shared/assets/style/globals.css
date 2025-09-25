@@ -118,6 +118,10 @@ body {
   }
 }
 
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }

@@ -6,6 +6,9 @@ import { Header } from '@/modules/Header'
 import { Footer } from '@/modules/Footer'
 import { CookieConsent } from '@/components/CookieConsent'
 
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
+import { Providers } from '@/shared/providers/Providers'
+
 const montserrat = Montserrat({
   variable: '--font-montserrat',
   subsets: ['latin'],
@@ -116,17 +119,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body
-        className={`${montserrat.variable} ${raleway.variable} ${roboto.variable} ${manrope.variable} flex h-full min-h-screen flex-col antialiased`}
-      >
-        <Header />
+      <Providers>
+        <body
+          className={`${montserrat.variable} ${raleway.variable} ${roboto.variable} ${manrope.variable} flex h-full min-h-screen flex-col antialiased`}
+        >
+          <Header />
 
-        <main className="flex-1 pt-[var(--h-header)]">{children}</main>
+          <main className="flex-1 pt-[var(--h-header)]">{children}</main>
 
-        <Footer />
+          <Footer />
 
-        <CookieConsent />
-      </body>
+          <CookieConsent />
+        </body>
+      </Providers>
     </html>
   )
 }
