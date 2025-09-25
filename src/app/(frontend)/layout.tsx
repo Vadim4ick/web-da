@@ -4,6 +4,7 @@ import { Manrope, Montserrat, Raleway, Roboto } from 'next/font/google'
 import './../../shared/assets/style/globals.css'
 import { Header } from '@/modules/Header'
 import { Footer } from '@/modules/Footer'
+import { CookieConsent } from '@/components/CookieConsent'
 
 const montserrat = Montserrat({
   variable: '--font-montserrat',
@@ -123,6 +124,8 @@ export default function RootLayout({
         <main className="flex-1 pt-[var(--h-header)]">{children}</main>
 
         <Footer />
+
+        <CookieConsent />
       </body>
     </html>
   )
