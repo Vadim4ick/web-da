@@ -3,24 +3,44 @@
 import { cn, formatPrice, pad2 } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import { AnimatePresence, motion } from 'motion/react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { ArrowBottom } from '@/shared/icons/ArrowBottom'
 import { useMediaQuery } from '@/shared/hooks/useMedia'
 import { Service } from '@/payload-types'
 import { ScrollLink } from '@/shared/ui/scrollLink'
+import { scroller } from 'react-scroll'
 
 export function AboutServicesCard({ item, idx }: { item: Service; idx: number }) {
   const isTablet = useMediaQuery(991)
   const [open, setOpen] = useState(false)
 
+  const extrasRef = useRef<HTMLDivElement | null>(null)
+
+  const scrollIfHidden = () => {
+    if (!extrasRef.current) return
+    const rect = extrasRef.current.getBoundingClientRect()
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight
+
+    if (rect.bottom > windowHeight) {
+      scroller.scrollTo(`service-${item.id}-button`, {
+        duration: 800, // 👈 плавность 800ms
+        smooth: 'easeInOutQuart',
+        offset: -250,
+      })
+    }
+  }
+  const handleEnter = () => setOpen(true)
+  const handleLeave = () => setOpen(false)
+
   return (
     <article
       key={item.id}
+      id={`service-${item.id}-button`}
       className={cn(
         'group about-card max-tablet:flex-[0_0_432px] max-mobile:flex-[0_0_auto] relative flex h-fit flex-col gap-1',
       )}
-      onMouseEnter={!isTablet ? () => setOpen(true) : undefined}
-      onMouseLeave={!isTablet ? () => setOpen(false) : undefined}
+      onMouseEnter={!isTablet ? handleEnter : undefined}
+      onMouseLeave={!isTablet ? handleLeave : undefined}
     >
       <div
         className={cn(
@@ -70,9 +90,11 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
         <AnimatePresence initial={false}>
           {open && (
             <motion.div
+              ref={extrasRef}
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
+              onAnimationComplete={scrollIfHidden}
               transition={{ duration: 0.45, ease: 'easeInOut' }}
               className="flex flex-col gap-1 overflow-hidden"
             >

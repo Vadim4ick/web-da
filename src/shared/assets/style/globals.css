@@ -147,6 +147,8 @@ body {
 @media (max-width: 768px) {
   .swiper-pagination {
     bottom: 12px !important;
+    padding: 3px;
+    gap: 3px !important;
   }
 }
 
@@ -158,6 +160,13 @@ body {
   margin: 0 !important;
   border-radius: 50%;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+  }
 }
 
 .swiper-pagination-bullet-active {
@@ -216,7 +225,7 @@ body {
   flex-direction: column;
 }
 .payload-richtext h2 {
-  @apply text-additional-soft-black text-[24px] leading-[125%] font-semibold;
+  @apply text-additional-soft-black font-montserrat text-[24px] leading-[125%] font-semibold;
 }
 
 .payload-richtext p {

@@ -1,12 +1,12 @@
-import { social } from "@/shared/const/const";
-import { Logo } from "@/shared/icons/Logo";
-import { cn } from "@/shared/lib/utils";
-import { Container } from "@/shared/ui/container";
-import Link from "next/link";
+import { social } from '@/shared/const/const'
+import { Logo } from '@/shared/icons/Logo'
+import { cn } from '@/shared/lib/utils'
+import { Container } from '@/shared/ui/container'
+import Link from 'next/link'
 
 const LinksDocs = ({ className }: { className?: string }) => {
   return (
-    <div className={cn("max-mobile:gap-[10px] flex flex-col gap-4", className)}>
+    <div className={cn('max-mobile:gap-[10px] flex flex-col gap-4', className)}>
       <a
         className="text-additional-grey-60 hover:text-primary-blue max-mobile:text-[18px] w-fit text-[20px] leading-[125%] font-medium transition-all"
         href="#!"
@@ -21,20 +21,19 @@ const LinksDocs = ({ className }: { className?: string }) => {
         Политика конфиденциальности
       </a>
     </div>
-  );
-};
+  )
+}
 
 const Footer = () => {
   return (
-    <footer className="max-tablet:bg-additional-grey-cold max-tablet:px-2 tablet:rounded-t-[48px] max-mobile:pb-2 bg-white">
+    <footer
+      id="footer"
+      className="max-tablet:bg-additional-grey-cold max-tablet:px-2 tablet:rounded-t-[48px] max-mobile:pb-2 bg-white"
+    >
       <Container className="max-desktop:flex-col max-desktop:gap-[72px] max-tablet:bg-white max-mobile:pt-[48px] max-mobile:pb-[36px] flex items-center justify-between gap-4 rounded-[20px] px-[32px] pt-[60px] pb-[72px]">
         <div className="flex flex-col gap-12">
           <Link href="/">
-            <Logo
-              className="max-mobile:w-[154px] max-mobile:h-[35px]"
-              width={204}
-              height={46}
-            />
+            <Logo className="max-mobile:w-[154px] max-mobile:h-[35px]" width={204} height={46} />
           </Link>
 
           <LinksDocs className="max-desktop:hidden" />
@@ -75,9 +74,9 @@ const Footer = () => {
                 <li key={item.id}>
                   <a
                     href={
-                      item.id === "mail"
+                      item.id === 'mail'
                         ? `mailto:${item.link}`
-                        : item.id === "phone"
+                        : item.id === 'phone'
                           ? `tel:${item.link}`
                           : item.link
                     }
@@ -113,7 +112,7 @@ const Footer = () => {
         <LinksDocs className="desktop:hidden items-center" />
       </Container>
     </footer>
-  );
-};
+  )
+}
 
-export { Footer };
+export { Footer }

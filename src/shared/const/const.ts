@@ -23,7 +23,7 @@ export const navbar: NavbarItem[] = [
   },
   {
     name: 'Контакты',
-    anchorId: 'contacts',
+    anchorId: 'footer',
   },
 ]
 
