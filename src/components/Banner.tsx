@@ -64,7 +64,7 @@ const Banner = ({ banners }: { banners: TBanner[] }) => {
                   </div>
 
                   <ScrollLink to={'contacts'} className="max-tablet:w-[160px] w-full max-w-[221px]">
-                    <Button className="text-primary-blue max-tablet:h-[46px] max-tablet:max-w-[160px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[66px] w-full rounded-[100px] bg-white text-[16px] leading-[22px] font-semibold hover:bg-[#E8F4FF]">
+                    <Button className="text-primary-blue max-tablet:h-[46px] font-montserrat max-tablet:max-w-[160px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[66px] w-full rounded-[100px] bg-white text-[16px] text-[18px] leading-[22px] font-semibold hover:bg-[#E8F4FF]">
                       Заказать сайт
                     </Button>
                   </ScrollLink>

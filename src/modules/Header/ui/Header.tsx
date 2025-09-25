@@ -9,10 +9,10 @@ import { ScrollLink } from '@/shared/ui/scrollLink'
 const Header = () => {
   return (
     <header className="border-b-additional-grey-cold fixed top-0 left-0 z-50 w-full border-b bg-white">
-      <Container className="px-4">
+      <Container className="max-mobile:px-4 px-4">
         <div className="flex h-[var(--h-header)] items-center justify-between gap-4">
           <Link href="/">
-            <Logo />
+            <Logo className="max-mobile:h-[18px] max-mobile:max-w-[80px]" />
           </Link>
 
           <Navbar className="max-tablet:hidden" />
