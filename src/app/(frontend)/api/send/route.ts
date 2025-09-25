@@ -4,10 +4,26 @@ import nodemailer from 'nodemailer'
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { name, phone, comment } = body
+    const { name, phone, comment, token } = body
 
     if (!name || !phone) {
       return NextResponse.json({ error: 'Имя и телефон обязательны' }, { status: 400 })
+    }
+
+    if (!token) {
+      return NextResponse.json({ message: 'Токен не указан' }, { status: 400 })
+    }
+
+    const res = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+    })
+
+    const data = await res.json()
+
+    if (!data.success || data.score < 0.5) {
+      return NextResponse.json({ success: false, message: 'Капча не пройдена' }, { status: 400 })
     }
 
     // Настраиваем транспорт
@@ -41,7 +57,7 @@ export async function POST(req: Request) {
 
     await transporter.sendMail(mailOptions)
 
-    const tgMessage = `📩 Новая заявка:\n\n👤 Имя: ${name}\n 📱 Телефон: ${phone}\n 💬 Комментарий: ${comment || '—'}`
+    const tgMessage = `📩 Новая заявка:\n\n👤 Имя: ${name}\n\n📱 Телефон: ${phone}\n\n💬 Комментарий: ${comment || '—'}`
     await fetch(`https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
