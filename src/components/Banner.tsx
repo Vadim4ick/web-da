@@ -4,52 +4,32 @@
 import { Button } from '@/shared/ui/button'
 import { Container } from '@/shared/ui/container'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Autoplay, Pagination } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Banner as TBanner } from '@/payload-types'
 import { ScrollLink } from '@/shared/ui/scrollLink'
 
-// const slider = [
-//   {
-//     id: 1,
-//     img: '/1.png',
-//     title: 'Создаём современные, функциональные и привлекательные сайты',
-//     subtitle:
-//       ' Каждый проект разрабатывается индивидуально, с учетом специфики вашего бизнеса и ваших целей',
-//   },
-//   {
-//     id: 2,
-//     img: '/2.png',
-//     title: 'Создаём современные, функциональные и привлекательные сайты',
-//     subtitle:
-//       ' Каждый проект разрабатывается индивидуально, с учетом специфики вашего бизнеса и ваших целей',
-//   },
-//   {
-//     id: 3,
-//     img: '/3.png',
-//     title: 'Создаём современные, функциональные и привлекательные сайты',
-//     subtitle:
-//       ' Каждый проект разрабатывается индивидуально, с учетом специфики вашего бизнеса и ваших целей',
-//   },
-// ]
-
 const Banner = ({ banners }: { banners: TBanner[] }) => {
   return (
-    <section className="max-mobile:pt-[8px] max-tablet:pb-[80px] max-mobile:pb-[64px] py-[48px]">
+    <section className="max-mobile:pt-[8px] max-mobile:pb-[64px] py-[48px]">
       <Container>
         <Swiper
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
           pagination={{ clickable: true }}
           slidesPerView={1}
           spaceBetween={16}
+          autoplay={{
+            delay: 3000, // ⏱️ задержка между слайдами (5s)
+            disableOnInteraction: false, // не отключать после ручного свайпа
+          }}
           loop
           className="w-full overflow-hidden rounded-[20px]"
         >
           {banners.map((item) => (
             <SwiperSlide key={item.id}>
-              <article className="bg-primary-blue tablet:min-h-[664px] tablet:h-[calc(100vh_-_var(--h-header)_-_96px)] max-tablet:h-[656px] max-tablet:flex-col relative flex items-end overflow-hidden rounded-[20px]">
+              <article className="bg-primary-blue max-tablet:flex-col max-mobile:h-[calc(100vh_-_var(--h-header)_-_10px)] tablet:min-h-[664px] relative flex h-[calc(100vh_-_var(--h-header)_-_96px)] items-end overflow-hidden rounded-[20px]">
                 {/* Текстовый блок */}
                 <div className="tablet:pl-[60px] max-tablet:items-center tablet:pt-[60px] tablet:pb-[60px] max-tablet:pb-[72px] max-mobile:pb-[64px] relative z-10 flex h-full flex-col justify-between gap-4 p-6">
                   <div className="max-tablet:gap-3 tablet:max-w-[600px] flex flex-col gap-6">

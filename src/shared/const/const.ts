@@ -33,7 +33,7 @@ export const social: { id: Social; name: string; link: string }[] = [
   {
     id: 'tg',
     name: 'Telegram',
-    link: 'https://t.me/da_web',
+    link: 'https://t.me/webwarecreators',
   },
   {
     id: 'mail',
@@ -42,7 +42,7 @@ export const social: { id: Social; name: string; link: string }[] = [
   },
   {
     id: 'phone',
-    name: 'Telegram',
+    name: 'Телефон',
     link: '8 (989) 292-07-17',
   },
 ]

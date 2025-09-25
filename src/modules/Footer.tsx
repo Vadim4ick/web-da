@@ -73,6 +73,7 @@ const Footer = () => {
               {social.map((item) => (
                 <li key={item.id}>
                   <a
+                    target="_blank"
                     href={
                       item.id === 'mail'
                         ? `mailto:${item.link}`
