@@ -183,10 +183,13 @@ const BannerSend = ({ className }: { className?: string }) => {
       </Container>
 
       <Dialog open={sendSuccess} onOpenChange={setSendSuccess}>
-        <DialogContent className="rounded-[12px] p-[48px] shadow-none" showCloseButton={false}>
-          <DialogHeader className="flex flex-col gap-[48px]">
+        <DialogContent
+          className="max-mobile:px-[52px] max-mobile:py-[36px] rounded-[12px] p-[48px] shadow-none"
+          showCloseButton={false}
+        >
+          <DialogHeader className="max-mobile:gap-[36px] flex flex-col gap-[48px]">
             <DialogTitle asChild>
-              <p className="text-primary-black text-center text-[28px] leading-[125%] font-semibold">
+              <p className="text-primary-black max-mobile:text-[20px] text-center text-[28px] leading-[125%] font-semibold">
                 Ваша заявка успешно отправлена, скоро свяжемся с вами
               </p>
             </DialogTitle>
@@ -195,7 +198,7 @@ const BannerSend = ({ className }: { className?: string }) => {
               <Button
                 type="button"
                 onClick={() => setSendSuccess(false)}
-                className="h-[60px] rounded-[100px] text-[16px] leading-[20px] text-white"
+                className="max-mobile:h-[46px] max-mobile:text-[14px] max-mobile:leading-[18px] h-[60px] rounded-[100px] text-[16px] leading-[20px] text-white"
               >
                 Отлично
               </Button>
