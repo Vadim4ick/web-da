@@ -118,6 +118,15 @@ body {
   }
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE и Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 @media (max-width: 744px) {
   [data-radix-popper-content-wrapper],
   [data-radix-popper-content-wrapper] > div {
@@ -126,8 +135,8 @@ body {
     top: -4px !important;
     bottom: 8px !important;
     width: auto !important;
-    max-width: calc(100% - 16px) !important;
-    max-height: calc(100% - 44px) !important;
+    /* max-width: calc(100% - 16px) !important;
+    max-height: calc(100% - 44px) !important; */
   }
 }
 

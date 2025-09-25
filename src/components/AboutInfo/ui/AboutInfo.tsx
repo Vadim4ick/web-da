@@ -14,10 +14,10 @@ const AboutInfo = ({
   servicesItems: Service[]
   aboutInfo: About
 }) => {
-  const isTablet = useMediaQuery(991)
+  const isDesktop1150 = useMediaQuery(1150)
 
   return (
-    <section className="max-tablet:py-[64px] max-tablet:rounded-[20px] max-tablet:gap-[96px] max-mobile:gap-[80px] mb-[120px] flex flex-col gap-[160px] rounded-[40px] bg-white py-[120px]">
+    <section className="max-tablet:py-[64px] max-mobile:py-[48px] max-mobile:mb-[64px] max-tablet:rounded-[20px] max-tablet:gap-[96px] max-mobile:gap-[80px] mb-[120px] flex flex-col gap-[160px] rounded-[40px] bg-white py-[120px]">
       <Container className="mobile:px-[24px] max-mobile:px-4 max-w-[1392px]">
         <div className="max-tablet:gap-[48px] flex flex-col gap-[80px]">
           <div
@@ -87,7 +87,7 @@ const AboutInfo = ({
         </div>
       </Container>
 
-      <Container className="mobile:px-[24px] max-mobile:px-4 max-tablet:pr-[0!important] max-w-[1392px]">
+      <Container className="mobile:px-[24px] max-mobile:px-4 max-desktop:pr-[0!important] max-w-[1392px]">
         <div id="services" className="max-tablet:gap-[48px] flex flex-col gap-[80px]">
           <h3 className="text-primary-black max-mobile:text-[32px] text-center text-[48px] leading-[125%] font-semibold">
             {services.title}
@@ -95,9 +95,9 @@ const AboutInfo = ({
 
           <div
             className={cn(
-              'max-tablet:flex max-tablet:items-start max-tablet:gap-4 max-tablet:overflow-auto max-mobile:flex-col max-mobile:gap-3 pr-4',
+              'max-desktop:flex max-desktop:items-start scrollbar-hide max-desktop:gap-4 max-desktop:overflow-auto max-mobile:flex-col max-mobile:gap-3 pr-4',
               {
-                'about-grid': !isTablet,
+                'about-grid': !isDesktop1150,
               },
             )}
           >

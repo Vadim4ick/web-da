@@ -3,7 +3,7 @@
 import { cn, formatPrice, pad2 } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import { AnimatePresence, motion } from 'motion/react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowBottom } from '@/shared/icons/ArrowBottom'
 import { useMediaQuery } from '@/shared/hooks/useMedia'
 import { Service } from '@/payload-types'
@@ -16,20 +16,43 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
 
   const extrasRef = useRef<HTMLDivElement | null>(null)
 
+  const cancelScroll = useRef(false)
+
+  useEffect(() => {
+    const cancel = () => {
+      cancelScroll.current = true
+    }
+    window.addEventListener('wheel', cancel, { passive: true })
+    window.addEventListener('touchstart', cancel, { passive: true })
+    window.addEventListener('keydown', cancel) // например PgUp/PgDn
+
+    return () => {
+      window.removeEventListener('wheel', cancel)
+      window.removeEventListener('touchstart', cancel)
+      window.removeEventListener('keydown', cancel)
+    }
+  }, [])
+
   const scrollIfHidden = () => {
+    if (cancelScroll.current) return
     if (!extrasRef.current) return
+
     const rect = extrasRef.current.getBoundingClientRect()
     const windowHeight = window.innerHeight || document.documentElement.clientHeight
 
     if (rect.bottom > windowHeight) {
       scroller.scrollTo(`service-${item.id}-button`, {
-        duration: 800, // 👈 плавность 800ms
+        duration: 800,
         smooth: 'easeInOutQuart',
         offset: -250,
       })
     }
   }
-  const handleEnter = () => setOpen(true)
+
+  const handleEnter = () => {
+    cancelScroll.current = false // сбрасываем флаг при новом открытии
+    setOpen(true)
+  }
   const handleLeave = () => setOpen(false)
 
   return (
@@ -37,7 +60,7 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
       key={item.id}
       id={`service-${item.id}-button`}
       className={cn(
-        'group about-card max-tablet:flex-[0_0_432px] max-mobile:flex-[0_0_auto] relative flex h-fit flex-col gap-1',
+        'group about-card max-desktop:flex-[0_0_432px] max-mobile:flex-[0_0_auto] relative flex h-fit flex-col gap-1',
       )}
       onMouseEnter={!isTablet ? handleEnter : undefined}
       onMouseLeave={!isTablet ? handleLeave : undefined}
