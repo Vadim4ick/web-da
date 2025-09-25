@@ -10,6 +10,14 @@ import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormField, FormControl } from '@/shared/ui/form'
+import { useState } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/ui/dialog'
 
 // схема валидации
 const formSchema = z.object({
@@ -24,6 +32,9 @@ const formSchema = z.object({
 })
 
 const BannerSend = ({ className }: { className?: string }) => {
+  const [sendSuccess, setSendSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,8 +45,26 @@ const BannerSend = ({ className }: { className?: string }) => {
     },
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log('✅ Отправлено:', values)
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+
+      if (res.ok) {
+        console.log('✅ Заявка отправлена!')
+        setSendSuccess(true)
+      } else {
+        console.error('❌ Ошибка при отправке')
+      }
+    } catch (err) {
+      console.error('Ошибка сети:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -138,8 +167,9 @@ const BannerSend = ({ className }: { className?: string }) => {
               </p>
 
               <Button
+                disabled={loading}
                 type="submit"
-                className="max-tablet:h-[46px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[60px] rounded-[100px] text-[16px] leading-[125%] font-bold"
+                className="max-tablet:h-[46px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[60px] rounded-[100px] text-[16px] leading-[125%] font-bold disabled:opacity-70"
               >
                 Обсудить проект
               </Button>
@@ -151,6 +181,28 @@ const BannerSend = ({ className }: { className?: string }) => {
           </p>
         </div>
       </Container>
+
+      <Dialog open={sendSuccess} onOpenChange={setSendSuccess}>
+        <DialogContent className="rounded-[12px] p-[48px] shadow-none" showCloseButton={false}>
+          <DialogHeader className="flex flex-col gap-[48px]">
+            <DialogTitle asChild>
+              <p className="text-primary-black text-center text-[28px] leading-[125%] font-semibold">
+                Ваша заявка успешно отправлена, скоро свяжемся с вами
+              </p>
+            </DialogTitle>
+
+            <DialogDescription asChild>
+              <Button
+                type="button"
+                onClick={() => setSendSuccess(false)}
+                className="h-[60px] rounded-[100px] text-[16px] leading-[20px] text-white"
+              >
+                Отлично
+              </Button>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </section>
   )
 }
