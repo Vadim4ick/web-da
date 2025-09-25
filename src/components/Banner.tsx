@@ -29,7 +29,7 @@ const Banner = ({ banners }: { banners: TBanner[] }) => {
         >
           {banners.map((item) => (
             <SwiperSlide key={item.id}>
-              <article className="bg-primary-blue max-tablet:flex-col max-mobile:h-[calc(100vh_-_var(--h-header)_-_10px)] tablet:min-h-[664px] relative flex h-[calc(100vh_-_var(--h-header)_-_96px)] items-end overflow-hidden rounded-[20px]">
+              <article className="bg-primary-blue max-tablet:flex-col max-mobile:h-[calc(100vh_-_var(--h-header)_-_13px)] tablet:min-h-[664px] relative flex h-[calc(100vh_-_var(--h-header)_-_96px)] items-end overflow-hidden rounded-[20px]">
                 {/* Текстовый блок */}
                 <div className="tablet:pl-[60px] max-tablet:items-center tablet:pt-[60px] tablet:pb-[60px] max-tablet:pb-[72px] max-mobile:pb-[64px] relative z-10 flex h-full flex-col justify-between gap-4 p-6">
                   <div className="max-tablet:gap-3 tablet:max-w-[600px] flex flex-col gap-6">
