@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Navbar } from './Navbar'
 import { Button } from '@/shared/ui/button'
 import { BurgerMenuIcon } from '@/shared/icons/BurgerMenuIcon'
-import { CloseIcon } from '@/shared/icons/CloseIcon'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/shared/ui/dropdown-menu'
 import { social } from '@/shared/const/const'
 import { ScrollLink } from '@/shared/ui/scrollLink'
@@ -19,7 +18,7 @@ export const BurgerMenu = () => {
           className={'tablet:hidden bg-additional-grey-cold burger rounded-[12px] p-[11px]'}
           aria-label="Открыть меню"
         >
-          {open ? <CloseIcon width={18} height={18} /> : <BurgerMenuIcon width={18} height={18} />}
+          <BurgerMenuIcon width={18} height={18} open={open} />
         </button>
       </DropdownMenuTrigger>
 
