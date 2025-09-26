@@ -165,7 +165,8 @@ const BannerSend = ({ className }: { className?: string }) => {
                   Я подтверждаю, что ознакомлен(а) <br /> с
                   <a
                     className="border-additional-grey-60 group-hover:text-primary-black border-b transition-all duration-300"
-                    href={'#!'}
+                    download
+                    href="/policy.docx"
                   >
                     {' '}
                     Политикой конфиденциальности

@@ -15,8 +15,9 @@ const LinksDocs = ({ className }: { className?: string }) => {
       </a>
 
       <a
+        download
         className="text-additional-grey-60 hover:text-primary-blue max-mobile:text-[18px] w-fit text-[20px] leading-[125%] font-medium transition-all"
-        href="#!"
+        href="/policy.docx"
       >
         Политика конфиденциальности
       </a>
