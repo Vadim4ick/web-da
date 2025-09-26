@@ -7,9 +7,12 @@ import { BurgerMenuIcon } from '@/shared/icons/BurgerMenuIcon'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/shared/ui/dropdown-menu'
 import { social } from '@/shared/const/const'
 import { ScrollLink } from '@/shared/ui/scrollLink'
+import { useMediaQuery } from '@/shared/hooks/useMedia'
 
 export const BurgerMenu = () => {
   const [open, setOpen] = useState(false)
+
+  const isMobile = useMediaQuery(768)
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -23,10 +26,30 @@ export const BurgerMenu = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
+        forceMount
+        side="bottom"
         align="end"
-        sideOffset={24}
+        sideOffset={isMobile ? 0 : 24}
         alignOffset={0}
-        className="max-mobile:h-full w-full max-w-full rounded-[20px] border-none px-[35px] py-[48px]"
+        className={[
+          // ваши размеры/вёрстка
+          'max-mobile:h-[calc(100dvh_-_var(--h-header)_-_13px)] w-full max-w-full rounded-[20px!important] border-none px-[35px] py-[48px]',
+          'origin-top transform-gpu will-change-[transform]',
+
+          '!opacity-100 data-[state=closed]:!opacity-100 data-[state=open]:!opacity-100',
+          'data-[state=closed]:scale-100 data-[state=open]:scale-100',
+          'data-[state=open]:translate-y-0',
+
+          '!z-40',
+
+          // анимация открытия/закрытия
+          'data-[state=open]:animate-in data-[state=closed]:animate-out',
+          'data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0',
+          'data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top',
+
+          // чуть плавнее движение
+          'duration-400 ease-out',
+        ].join(' ')}
       >
         <div className="max-mobile:gap-[85px] flex flex-col gap-[45px]">
           <div className="flex w-full flex-col items-center justify-center gap-[32px]">
@@ -42,6 +65,16 @@ export const BurgerMenu = () => {
 
           <div className="flex flex-col gap-12">
             <ul className="max-tablet:items-center max-mobile:gap-[10px] flex flex-col gap-[10px]">
+              <ScrollLink
+                onClick={() => setOpen(false)}
+                to={'footer'}
+                className="flex h-full w-full items-center justify-center"
+              >
+                <p className="text-primary-blue text-[18px] leading-[125%] font-medium transition-all">
+                  Контакты
+                </p>
+              </ScrollLink>
+
               {social.map((item) => (
                 <li key={item.id}>
                   <a
@@ -55,7 +88,7 @@ export const BurgerMenu = () => {
                     }
                     className="text-additional-grey-60 hover:text-primary-blue text-[18px] leading-[125%] font-medium transition-all"
                   >
-                    {item.name}
+                    {item.id === 'phone' ? item.link : item.name}
                   </a>
                 </li>
               ))}
@@ -66,7 +99,9 @@ export const BurgerMenu = () => {
                 to={'contacts'}
                 className="flex h-full w-full items-center justify-center"
               >
-                <Button className="w-full max-w-[190px] py-[14px]">Отправить заявку</Button>
+                <Button className="w-full max-w-[190px] rounded-[100px] py-[14px]">
+                  Отправить заявку
+                </Button>
               </ScrollLink>
             </div>
           </div>

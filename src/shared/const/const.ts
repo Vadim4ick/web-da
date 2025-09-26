@@ -2,6 +2,7 @@ export type NavbarItem = {
   name: string
   anchorId?: string
   path?: string
+  isNotBurger?: boolean
 }
 
 export const navbar: NavbarItem[] = [
@@ -24,6 +25,7 @@ export const navbar: NavbarItem[] = [
   {
     name: 'Контакты',
     anchorId: 'footer',
+    isNotBurger: true,
   },
 ]
 
@@ -31,14 +33,14 @@ type Social = 'tg' | 'mail' | 'phone'
 
 export const social: { id: Social; name: string; link: string }[] = [
   {
-    id: 'tg',
-    name: 'Telegram',
-    link: 'https://t.me/webwarecreators',
-  },
-  {
     id: 'mail',
     name: 'web-da@mail.ru',
     link: 'web-da@mail.ru',
+  },
+  {
+    id: 'tg',
+    name: 'Telegram',
+    link: 'https://t.me/webwarecreators',
   },
   {
     id: 'phone',
