@@ -1,0 +1,90 @@
+name: Build & Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+
+      # Сжимаем артефакт. Кладём всё нужное для прод-запуска:
+      - name: Pack release
+        run: |
+          mkdir -p release
+          # Next standalone (в нём уже есть минимальный node_modules для Next)
+          cp -r .next/standalone release/
+          mkdir -p release/standalone/.next
+          cp -r .next/static release/standalone/.next/static
+          # Payload/сервер
+          cp -r dist release/dist || true
+          cp -r public release/public || true
+          cp package.json package-lock.json release/
+          # старт-скрипт (правь, если у тебя другой вход)
+          cat > release/start.sh << 'EOF'
+          #!/usr/bin/env bash
+          set -e
+          export NODE_ENV=production
+          # если у тебя единый кастомный сервер с payload+next:
+          node dist/server.js
+          EOF
+          chmod +x release/start.sh
+          tar -czf release.tar.gz -C release .
+
+      # Копируем на VPS
+      - name: Upload
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: 'release.tar.gz'
+          target: '/opt/myapp/releases/${{ github.sha }}/'
+
+      # Разворачиваем и перезапускаем процесс
+      - name: Deploy & PM2 reload
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+            APP_DIR=/opt/myapp
+            RELEASE=${{ github.sha }}
+
+            mkdir -p $APP_DIR/releases/$RELEASE
+            cd $APP_DIR/releases/$RELEASE
+            tar -xzf release.tar.gz
+
+            # если серверная часть требует runtime-зависимостей (express/payload и т.д.)
+            [ -f package.json ] && npm ci --omit=dev || true
+
+            # .env держим отдельно и линкуем/читаем в коде
+            # ln -sfn $APP_DIR/shared/.env .env  # если нужно
+
+            ln -sfn $APP_DIR/releases/$RELEASE $APP_DIR/current
+
+            # первый запуск (cluster, чтобы потом делать zero-downtime reload)
+            if ! pm2 describe next-app >/dev/null 2>&1; then
+              pm2 start $APP_DIR/current/start.sh --name next-app -i max --update-env
+            else
+              pm2 reload next-app --update-env
+            fi
+
+            pm2 save
+
+            pm2 list
