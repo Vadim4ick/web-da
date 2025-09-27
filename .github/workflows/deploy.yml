@@ -79,10 +79,10 @@ jobs:
             tar -xzf release.tar.gz
             rm release.tar.gz
 
-            if ! pm2 describe web-da >/dev/null 2>&1; then
-              pm2 start start.sh --name web-da -i max --update-env
+            if ! pm2 describe next-app >/dev/null 2>&1; then
+              pm2 start start.sh --name next-app -i max --update-env
             else
-              pm2 reload web-da --update-env
+              pm2 reload next-app --update-env
             fi
 
             pm2 save
