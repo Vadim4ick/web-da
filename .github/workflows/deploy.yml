@@ -66,28 +66,29 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             set -e
-            APP_DIR=/opt/myapp
-            RELEASE=${{ github.sha }}
 
-            mkdir -p $APP_DIR/releases/$RELEASE
-            cd $APP_DIR/releases/$RELEASE
+            # подключаем nvm
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 22
+
+            APP_DIR=$HOME/web-da
+
+            mkdir -p $APP_DIR
+            cd $APP_DIR
+
+            # распаковать новый релиз (release.tar.gz должен прилететь)
             tar -xzf release.tar.gz
 
-            # если серверная часть требует runtime-зависимостей (express/payload и т.д.)
+            # поставить зависимости если есть package.json
             [ -f package.json ] && npm ci --omit=dev || true
 
-            # .env держим отдельно и линкуем/читаем в коде
-            # ln -sfn $APP_DIR/shared/.env .env  # если нужно
-
-            ln -sfn $APP_DIR/releases/$RELEASE $APP_DIR/current
-
-            # первый запуск (cluster, чтобы потом делать zero-downtime reload)
-            if ! pm2 describe next-app >/dev/null 2>&1; then
-              pm2 start $APP_DIR/current/start.sh --name next-app -i max --update-env
+            # запустить через pm2
+            if ! pm2 describe web-da >/dev/null 2>&1; then
+              pm2 start start.sh --name web-da -i max --update-env
             else
-              pm2 reload next-app --update-env
+              pm2 reload web-da --update-env
             fi
 
             pm2 save
-
             pm2 list
