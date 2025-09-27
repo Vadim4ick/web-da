@@ -29,8 +29,8 @@ export const BurgerMenu = () => {
         forceMount
         side="bottom"
         align="end"
-        sideOffset={isMobile ? 0 : 24}
-        alignOffset={0}
+        sideOffset={isMobile ? 0 : 20}
+        alignOffset={isMobile ? 0 : -5}
         className={[
           // ваши размеры/вёрстка
           'max-mobile:h-[calc(100dvh_-_var(--h-header)_-_13px)] w-full max-w-full rounded-[20px!important] border-none px-[35px] py-[48px]',

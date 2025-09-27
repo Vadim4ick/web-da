@@ -13,7 +13,7 @@ import { ScrollLink } from '@/shared/ui/scrollLink'
 
 const Banner = ({ banners }: { banners: TBanner[] }) => {
   return (
-    <section className="max-mobile:pt-[8px] max-mobile:pb-[64px] py-[48px]">
+    <section className="max-tablet:pt-[8px] max-tablet:pb-[64px] py-[48px]">
       <Container>
         <Swiper
           modules={[Pagination, Autoplay]}
@@ -29,22 +29,22 @@ const Banner = ({ banners }: { banners: TBanner[] }) => {
         >
           {banners.map((item) => (
             <SwiperSlide key={item.id}>
-              <article className="bg-primary-blue max-tablet:flex-col max-mobile:h-[calc(100vh_-_var(--h-header)_-_13px)] tablet:min-h-[664px] relative flex h-[calc(100vh_-_var(--h-header)_-_96px)] items-end overflow-hidden rounded-[20px]">
+              <article className="bg-primary-blue max-tablet:flex-col max-tablet:h-[calc(100vh_-_var(--h-header)_-_13px)] tablet:min-h-[664px] relative flex h-[calc(100vh_-_var(--h-header)_-_96px)] items-end overflow-hidden rounded-[20px]">
                 {/* Текстовый блок */}
-                <div className="tablet:pl-[60px] max-tablet:items-center tablet:pt-[60px] tablet:pb-[60px] max-tablet:pb-[72px] max-mobile:pb-[64px] relative z-10 flex h-full flex-col justify-between gap-4 p-6">
-                  <div className="max-tablet:gap-3 tablet:max-w-[600px] flex flex-col gap-6">
-                    <h2 className="max-tablet:text-[22px] text-[40px] leading-[125%] font-semibold text-white">
+                <div className="tablet:pl-[60px] max-mobile:p-[24px] max-tablet:p-[48px] max-tablet:items-center tablet:pt-[60px] tablet:pb-[60px] max-tablet:pb-[72px] max-mobile:pb-[64px] relative z-10 flex h-full flex-col justify-between gap-4 p-6">
+                  <div className="max-mobile:gap-3 tablet:max-w-[600px] flex flex-col gap-6">
+                    <h2 className="max-mobile:text-[22px] text-[40px] leading-[125%] font-semibold text-white">
                       {item.title}
                     </h2>
                     {item.description && (
-                      <p className="font-raleway max-tablet:text-[14px] max-w-[511px] text-[24px] leading-[125%] font-semibold text-white opacity-70">
+                      <p className="font-raleway max-mobile:text-[14px] tablet:max-w-[511px] text-[24px] leading-[125%] font-semibold text-white opacity-70">
                         {item.description}
                       </p>
                     )}
                   </div>
 
                   <ScrollLink to={'contacts'} className="max-tablet:w-[160px] w-full max-w-[221px]">
-                    <Button className="text-primary-blue max-tablet:h-[46px] font-montserrat max-tablet:max-w-[160px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[66px] w-full rounded-[100px] bg-white text-[16px] text-[18px] leading-[22px] font-semibold hover:bg-[#E8F4FF]">
+                    <Button className="text-primary-blue max-tablet:h-[46px] font-montserrat max-tablet:max-w-[160px] max-tablet:text-[14px] max-tablet:leading-[18px] h-[66px] w-full rounded-[100px] bg-white text-[18px] leading-[22px] font-semibold hover:bg-[#E8F4FF]">
                       Заказать сайт
                     </Button>
                   </ScrollLink>
@@ -64,7 +64,7 @@ const Banner = ({ banners }: { banners: TBanner[] }) => {
                     <img
                       src={item.image.url}
                       alt={`slide ${item.id}`}
-                      className="max-tablet:max-h-[530px] max-tablet:object-cover max-tablet:h-[450px]"
+                      className="max-tablet:object-cover max-tablet:max-h-[530px] max-tablet:h-[450px]"
                     />
                   </div>
                 )}
