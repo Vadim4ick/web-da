@@ -9,7 +9,6 @@ export const revalidate = 60
 
 const Home = async () => {
   const payload = await getPayloadClient()
-  console.log(1)
 
   const results = await Promise.allSettled([
     payload.find({ collection: 'services' }),
