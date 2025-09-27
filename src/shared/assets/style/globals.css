@@ -258,3 +258,9 @@ body {
   flex-direction: column;
   gap: 6px;
 }
+
+.num-lining-proportional {
+  font-family: var(--font-raleway);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 600;
+}
