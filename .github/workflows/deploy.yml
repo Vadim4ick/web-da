@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
 
     steps:
       - uses: actions/checkout@v4
