@@ -6,7 +6,6 @@ import { Header } from '@/modules/Header'
 import { Footer } from '@/modules/Footer'
 import { CookieConsent } from '@/components/CookieConsent'
 
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import { Providers } from '@/shared/providers/Providers'
 
 const montserrat = Montserrat({
@@ -19,6 +18,7 @@ const raleway = Raleway({
   variable: '--font-raleway',
   subsets: ['latin'],
   weight: ['500', '600', '700'],
+  display: 'swap',
 })
 
 const roboto = Roboto({

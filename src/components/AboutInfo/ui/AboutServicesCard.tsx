@@ -51,9 +51,12 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
 
   const handleEnter = () => {
     cancelScroll.current = false // сбрасываем флаг при новом открытии
+
     setOpen(true)
   }
-  const handleLeave = () => setOpen(false)
+  const handleLeave = () => {
+    setOpen(false)
+  }
 
   return (
     <article
@@ -125,10 +128,10 @@ export function AboutServicesCard({ item, idx }: { item: Service; idx: number })
                 {item.extras.map((extra) => (
                   <div
                     key={extra.id}
-                    className="font-raleway max-mobile:text-[12px] flex justify-between text-[16px] leading-[130%] font-semibold"
+                    className="font-raleway max-mobile:text-[12px] text-additional-soft-black flex justify-between text-[16px] leading-[130%] font-semibold"
                   >
                     <span>{extra?.name}</span>
-                    <span>{extra?.price}</span>
+                    <span className="num-lining-proportional"> {extra?.price}</span>
                   </div>
                 ))}
               </div>
