@@ -12,7 +12,6 @@ import { Banner as TBanner } from '@/payload-types'
 import { ScrollLink } from '@/shared/ui/scrollLink'
 
 const Banner = ({ banners }: { banners: TBanner[] }) => {
-  console.log(1)
   return (
     <section className="max-tablet:pt-[8px] max-tablet:pb-[64px] py-[48px]">
       <Container>
