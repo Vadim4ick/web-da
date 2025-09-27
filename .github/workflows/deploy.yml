@@ -54,10 +54,10 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: 'release.tar.gz'
-          target: '/opt/myapp/releases/${{ github.sha }}/'
+          target: '~/web-da/'
 
       # Разворачиваем и перезапускаем процесс
-      - name: Deploy & PM2 reload
+      - name: Deploy on VPS
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -66,24 +66,15 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             set -e
-
-            # подключаем nvm
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm use 22
 
-            APP_DIR=$HOME/web-da
+            cd ~/web-da
 
-            mkdir -p $APP_DIR
-            cd $APP_DIR
-
-            # распаковать новый релиз (release.tar.gz должен прилететь)
             tar -xzf release.tar.gz
+            rm release.tar.gz
 
-            # поставить зависимости если есть package.json
-            [ -f package.json ] && npm ci --omit=dev || true
-
-            # запустить через pm2
             if ! pm2 describe web-da >/dev/null 2>&1; then
               pm2 start start.sh --name web-da -i max --update-env
             else
@@ -91,4 +82,3 @@ jobs:
             fi
 
             pm2 save
-            pm2 list
