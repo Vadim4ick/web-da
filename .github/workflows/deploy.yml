@@ -26,23 +26,28 @@ jobs:
       - name: Pack release
         run: |
           mkdir -p release
-          # Next standalone (в нём уже есть минимальный node_modules для Next)
+
+          # 1. Next standalone (уже содержит node_modules)
           cp -r .next/standalone release/
           mkdir -p release/standalone/.next
           cp -r .next/static release/standalone/.next/static
-          # Payload/сервер
-          cp -r dist release/dist || true
+
+          # 2. Папка public (для картинок и ассетов)
           cp -r public release/public || true
+
+          # 3. package.json и lockfile (на всякий случай)
           cp package.json package-lock.json release/
-          # старт-скрипт (правь, если у тебя другой вход)
+
+          # 4. Стартовый скрипт
           cat > release/start.sh << 'EOF'
           #!/usr/bin/env bash
           set -e
           export NODE_ENV=production
-          # если у тебя единый кастомный сервер с payload+next:
-          node dist/server.js
+          node standalone/server.js
           EOF
           chmod +x release/start.sh
+
+          # 5. Собираем архив
           tar -czf release.tar.gz -C release .
 
       # Копируем на VPS
@@ -71,7 +76,6 @@ jobs:
             nvm use 22
 
             cd ~/web-da
-
             tar -xzf release.tar.gz
             rm release.tar.gz
 
