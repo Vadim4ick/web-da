@@ -22,35 +22,24 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      # Сжимаем артефакт. Кладём всё нужное для прод-запуска:
+      # 📦 Сжимаем артефакт. Пакуем .next и нужные файлы
       - name: Pack release
         run: |
           mkdir -p release
 
-          # 1. Next standalone (уже содержит node_modules)
-          cp -r .next/standalone release/
-          mkdir -p release/standalone/.next
-          cp -r .next/static release/standalone/.next/static
+          # 1. Билд Next.js
+          cp -r .next release/.next
 
-          # 2. Папка public (для картинок и ассетов)
+          # 2. Папка public (для ассетов)
           cp -r public release/public || true
 
-          # 3. package.json и lockfile (на всякий случай)
+          # 3. package.json и lockfile (для runtime)
           cp package.json package-lock.json release/
 
-          # 4. Стартовый скрипт
-          cat > release/start.sh << 'EOF'
-          #!/usr/bin/env bash
-          set -e
-          export NODE_ENV=production
-          node standalone/server.js
-          EOF
-          chmod +x release/start.sh
-
-          # 5. Собираем архив
+          # 4. Собираем архив
           tar -czf release.tar.gz -C release .
 
-      # Копируем на VPS
+      # 📤 Копируем на VPS
       - name: Upload
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -61,7 +50,7 @@ jobs:
           source: 'release.tar.gz'
           target: '~/web-da/'
 
-      # Разворачиваем и перезапускаем процесс
+      # 🚀 Разворачиваем и запускаем
       - name: Deploy on VPS
         uses: appleboy/ssh-action@v1.1.0
         with:
@@ -79,8 +68,11 @@ jobs:
             tar -xzf release.tar.gz
             rm release.tar.gz
 
+            # ставим только runtime зависимости
+            npm ci --omit=dev
+
             if ! pm2 describe next-app >/dev/null 2>&1; then
-              pm2 start start.sh --name next-app -i max --update-env
+              pm2 start npm --name "next-app" -- run start -- -p 3000
             else
               pm2 reload next-app --update-env
             fi
