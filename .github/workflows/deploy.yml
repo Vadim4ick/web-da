@@ -1,90 +1,90 @@
-name: Build & Deploy to VPS
+# name: Build & Deploy to VPS
 
-on:
-  push:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    env:
-      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-      DATABASE_URI: ${{ secrets.DATABASE_URI }}
-      SMTP_HOST: ${{ secrets.SMTP_HOST }}
-      SMTP_PORT: ${{ secrets.SMTP_PORT }}
-      SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
-      SMTP_USER: ${{ secrets.SMTP_USER }}
-      SMTP_PASS: ${{ secrets.SMTP_PASS }}
-      MAIL_TO: ${{ secrets.MAIL_TO }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-      NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-      RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+#     env:
+#       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+#       DATABASE_URI: ${{ secrets.DATABASE_URI }}
+#       SMTP_HOST: ${{ secrets.SMTP_HOST }}
+#       SMTP_PORT: ${{ secrets.SMTP_PORT }}
+#       SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+#       SMTP_USER: ${{ secrets.SMTP_USER }}
+#       SMTP_PASS: ${{ secrets.SMTP_PASS }}
+#       MAIL_TO: ${{ secrets.MAIL_TO }}
+#       TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+#       TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+#       NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+#       RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
 
-    steps:
-      - uses: actions/checkout@v4
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#           cache: 'npm'
 
-      - run: npm ci
-      - run: npm run build
+#       - run: npm ci
+#       - run: npm run build
 
-      # 📦 Сжимаем артефакт. Пакуем .next и нужные файлы
-      - name: Pack release
-        run: |
-          mkdir -p release
+#       # 📦 Сжимаем артефакт. Пакуем .next и нужные файлы
+#       - name: Pack release
+#         run: |
+#           mkdir -p release
 
-          # 1. Билд Next.js
-          cp -r .next release/.next
+#           # 1. Билд Next.js
+#           cp -r .next release/.next
 
-          # 2. Папка public (для ассетов)
-          cp -r public release/public || true
+#           # 2. Папка public (для ассетов)
+#           cp -r public release/public || true
 
-          # 3. package.json и lockfile (для runtime)
-          cp package.json package-lock.json release/
+#           # 3. package.json и lockfile (для runtime)
+#           cp package.json package-lock.json release/
 
-          # 4. Собираем архив
-          tar -czf release.tar.gz -C release .
+#           # 4. Собираем архив
+#           tar -czf release.tar.gz -C release .
 
-      # 📤 Копируем на VPS
-      - name: Upload
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          port: ${{ secrets.VPS_PORT }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          source: 'release.tar.gz'
-          target: '~/web-da/'
+#       # 📤 Копируем на VPS
+#       - name: Upload
+#         uses: appleboy/scp-action@v0.1.7
+#         with:
+#           host: ${{ secrets.VPS_HOST }}
+#           username: ${{ secrets.VPS_USER }}
+#           port: ${{ secrets.VPS_PORT }}
+#           key: ${{ secrets.VPS_SSH_KEY }}
+#           source: 'release.tar.gz'
+#           target: '~/web-da/'
 
-      # 🚀 Разворачиваем и запускаем
-      - name: Deploy on VPS
-        uses: appleboy/ssh-action@v1.1.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          port: ${{ secrets.VPS_PORT }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            set -e
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm use 22
+#       # 🚀 Разворачиваем и запускаем
+#       - name: Deploy on VPS
+#         uses: appleboy/ssh-action@v1.1.0
+#         with:
+#           host: ${{ secrets.VPS_HOST }}
+#           username: ${{ secrets.VPS_USER }}
+#           port: ${{ secrets.VPS_PORT }}
+#           key: ${{ secrets.VPS_SSH_KEY }}
+#           script: |
+#             set -e
+#             export NVM_DIR="$HOME/.nvm"
+#             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#             nvm use 22
 
-            cd ~/web-da
-            tar -xzf release.tar.gz
-            rm release.tar.gz
+#             cd ~/web-da
+#             tar -xzf release.tar.gz
+#             rm release.tar.gz
 
-            # ставим только runtime зависимости
-            npm ci --omit=dev
+#             # ставим только runtime зависимости
+#             npm ci --omit=dev
 
-            if ! pm2 describe next-app >/dev/null 2>&1; then
-              pm2 start npm --name "next-app" -- run start -- -p 3000
-            else
-              pm2 reload next-app --update-env
-            fi
+#             if ! pm2 describe next-app >/dev/null 2>&1; then
+#               pm2 start npm --name "next-app" -- run start -- -p 3000
+#             else
+#               pm2 reload next-app --update-env
+#             fi
 
-            pm2 save
+#             pm2 save

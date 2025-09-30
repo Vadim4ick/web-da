@@ -188,7 +188,7 @@ const BannerSend = ({ className }: { className?: string }) => {
             </form>
           </Form>
 
-          <p className="font-raleway max-mobile:px-3 max-tablet:text-[16px] mobile:hidden text-[24px] leading-[125%] font-semibold text-white/70">
+          <p className="font-raleway num-lining-proportional max-mobile:px-3 max-tablet:text-[16px] mobile:hidden text-[24px] leading-[125%] font-semibold text-white/70">
             Ответим в течение 24 часов и предложим первые идеи бесплатно
           </p>
         </div>

@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
 
-import { cn } from "@/shared/lib/utils";
+import { cn } from '@/shared/lib/utils'
 
 function Textarea({
   className,
   label,
   ...props
-}: React.ComponentProps<"textarea"> & {
-  label: string;
+}: React.ComponentProps<'textarea'> & {
+  label: string
 }) {
-  const [focused, setFocused] = React.useState(false);
+  const [focused, setFocused] = React.useState(false)
 
   return (
     <div
       className={cn(
-        "bg-additional-grey-neutral flex flex-col gap-[10px] rounded-[12px] px-4 pt-3 pb-[14px] transition-all",
+        'bg-additional-grey-neutral flex flex-col gap-[10px] rounded-[12px] px-4 pt-3 pb-[14px] transition-all',
         {
-          "hover:bg-additional-grey-cold": !focused,
+          'hover:bg-additional-grey-cold': !focused,
         },
       )}
     >
@@ -31,13 +31,13 @@ function Textarea({
         onBlur={() => setFocused(false)}
         data-slot="textarea"
         className={cn(
-          "placeholder:text-additional-grey-60 max-tablet:min-h-[60px] max-tablet:text-[16px] max-tablet:leading-[20px] font-raleway text-primary-black flex w-full bg-transparent text-[18px] leading-[22px] font-semibold transition-all outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+          'max-tablet:min-h-[60px] max-tablet:text-[16px] max-tablet:leading-[20px] font-raleway text-primary-black flex w-full bg-transparent text-[18px] leading-[22px] font-semibold transition-all outline-none placeholder:text-[#828899]/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
           className,
         )}
         {...props}
       />
     </div>
-  );
+  )
 }
 
-export { Textarea };
+export { Textarea }

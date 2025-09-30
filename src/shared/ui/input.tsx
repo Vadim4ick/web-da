@@ -21,7 +21,7 @@ function Input({
   const [focused, setFocused] = React.useState(false)
 
   const inputClasses = cn(
-    'placeholder:text-additional-grey-60 max-tablet:text-[16px] max-tablet:leading-[20px] text-primary-black flex w-full bg-transparent text-[18px] leading-[22px] font-semibold transition-all outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+    'placeholder:text-[#828899]/50 max-tablet:text-[16px] max-tablet:leading-[20px] text-primary-black flex w-full bg-transparent text-[18px] leading-[22px] font-semibold transition-all outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
     className,
     {
       'text-[#F22424]': error,
