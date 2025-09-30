@@ -236,7 +236,7 @@ body {
   flex-direction: column;
 }
 .payload-richtext h2 {
-  @apply text-additional-soft-black font-montserrat text-[24px] leading-[125%] font-semibold;
+  @apply text-additional-soft-black font-montserrat max-mobile:text-[20px] text-[24px] leading-[125%] font-semibold;
 }
 
 .payload-richtext p {
@@ -263,4 +263,10 @@ body {
   font-family: var(--font-raleway);
   font-variant-numeric: lining-nums proportional-nums;
   font-weight: 600;
+}
+
+li::marker {
+  font-family: var(--font-raleway);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 500;
 }

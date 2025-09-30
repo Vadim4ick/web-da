@@ -51,7 +51,7 @@ export const BurgerMenu = () => {
           'duration-400 ease-out',
         ].join(' ')}
       >
-        <div className="max-mobile:gap-[85px] flex flex-col gap-[45px]">
+        <div className="max-mobile:gap-[64px] max-mobile:h-full max-mobile:justify-between flex flex-col gap-[45px]">
           <div className="flex w-full flex-col items-center justify-center gap-[32px]">
             <p className="text-additional-grey-60 text-[18px] leading-[125%] font-medium">
               Навигация
