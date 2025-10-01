@@ -7,12 +7,12 @@ import Link from 'next/link'
 const LinksDocs = ({ className }: { className?: string }) => {
   return (
     <div className={cn('max-mobile:gap-[10px] flex flex-col gap-4', className)}>
-      <a
+      {/* <a
         className="text-additional-grey-60 hover:text-primary-blue max-mobile:text-[18px] w-fit text-[20px] leading-[125%] font-medium transition-all"
         href="#!"
       >
         Публичная оферта
-      </a>
+      </a> */}
 
       <a
         download

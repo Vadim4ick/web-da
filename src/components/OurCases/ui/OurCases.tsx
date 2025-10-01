@@ -27,6 +27,7 @@ const OurCases = ({ className, cases }: { className?: string; cases: CasesHomePa
               <div className="max-tablet:h-[236px] max-tablet:rounded-[12px] max-mobile:h-[230px] relative h-[440px] w-full overflow-hidden rounded-[20px]">
                 {typeof item.mainImage !== 'number' && item.mainImage?.url && (
                   <Image
+                    unoptimized
                     fill
                     src={item.mainImage.url!}
                     alt={item.title}
