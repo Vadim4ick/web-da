@@ -20,6 +20,7 @@ import {
 } from '@/shared/ui/dialog'
 
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import Link from 'next/link'
 
 // схема валидации
 const formSchema = z.object({
@@ -162,20 +163,24 @@ const BannerSend = ({ className }: { className?: string }) => {
                 <Checkbox />
 
                 <span className="font-raleway text-additional-grey-60 group text-[16px] leading-[22px] font-medium">
-                  Я подтверждаю, что ознакомлен(а) <br /> с
-                  <a
+                  Я подтверждаю, что ознакомлен(а) <br /> с{' '}
+                  <Link
                     className="border-additional-grey-60 group-hover:text-primary-black border-b transition-all duration-300"
-                    download
-                    href="/policy.docx"
+                    href="/policy"
                   >
-                    {' '}
                     Политикой конфиденциальности
-                  </a>
+                  </Link>
                 </span>
               </label>
 
               <p className="tablet:hidden font-manrope text-additional-grey-60 text-center text-[12px] leading-[15px] font-semibold">
-                Отправляя данную форму вы соглашаетесь <br /> с политикой конфиденциальности
+                Отправляя данную форму вы соглашаетесь <br /> c{' '}
+                <Link
+                  className="border-additional-grey-60 group-hover:text-primary-black border-b transition-all duration-300"
+                  href="/policy"
+                >
+                  Политикой конфиденциальности
+                </Link>
               </p>
 
               <Button
@@ -197,7 +202,7 @@ const BannerSend = ({ className }: { className?: string }) => {
       <Dialog open={sendSuccess} onOpenChange={setSendSuccess}>
         <DialogContent
           className="max-mobile:px-[52px] max-mobile:py-[36px] rounded-[12px] p-[48px] shadow-none"
-          showCloseButton={false}
+          // showCloseButton={false}
         >
           <DialogHeader className="max-mobile:gap-[36px] flex flex-col gap-[48px]">
             <DialogTitle asChild>
