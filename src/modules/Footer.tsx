@@ -31,8 +31,8 @@ const Footer = () => {
       id="footer"
       className="max-tablet:bg-additional-grey-cold max-tablet:px-2 tablet:rounded-t-[48px] max-mobile:pb-2 bg-white"
     >
-      <Container className="max-desktop:flex-col max-desktop:gap-[72px] max-tablet:bg-white max-mobile:pt-[48px] max-mobile:pb-[36px] flex items-center justify-between gap-4 rounded-[20px] px-[32px] pt-[60px] pb-[72px]">
-        <div className="flex flex-col gap-12">
+      <Container className="max-desktop:flex-col max-desktop:gap-[72px] max-tablet:bg-white max-mobile:pt-[48px] max-mobile:pb-[36px] flex h-full items-center justify-between gap-4 rounded-[20px] px-[32px] pt-[60px] pb-[72px]">
+        <div className="flex h-full flex-col justify-between gap-12">
           <Link href="/">
             <Logo className="max-mobile:w-[154px] max-mobile:h-[35px]" width={204} height={46} />
           </Link>
