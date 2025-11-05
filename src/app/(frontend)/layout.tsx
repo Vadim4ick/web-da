@@ -7,7 +7,7 @@ import { Footer } from '@/modules/Footer'
 import { CookieConsent } from '@/components/CookieConsent'
 
 import { Providers } from '@/shared/providers/Providers'
-
+import { YandexMetrikaContainer } from '@/shared/ui/yandexMetrikaContainer'
 const montserrat = Montserrat({
   variable: '--font-montserrat',
   subsets: ['latin'],
@@ -130,6 +130,8 @@ export default function RootLayout({
           <Footer />
 
           <CookieConsent />
+
+          <YandexMetrikaContainer />
         </body>
       </Providers>
     </html>
