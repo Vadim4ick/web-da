@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope, Montserrat, Raleway, Roboto } from 'next/font/google'
+import { YandexMetrikaWrapper } from '@/shared/ui/yandexMetrikaContainer'
 
 import './../../shared/assets/style/globals.css'
 import { Header } from '@/modules/Header'
@@ -7,7 +8,6 @@ import { Footer } from '@/modules/Footer'
 import { CookieConsent } from '@/components/CookieConsent'
 
 import { Providers } from '@/shared/providers/Providers'
-import { YandexMetrikaContainer } from '@/shared/ui/yandexMetrikaContainer'
 const montserrat = Montserrat({
   variable: '--font-montserrat',
   subsets: ['latin'],
@@ -131,7 +131,7 @@ export default function RootLayout({
 
           <CookieConsent />
 
-          <YandexMetrikaContainer />
+          <YandexMetrikaWrapper />
         </body>
       </Providers>
     </html>

@@ -1,7 +1,7 @@
 'use client'
 
 import Script from 'next/script'
-import { useCallback, useEffect } from 'react'
+import { Suspense, useCallback, useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
 type Props = {
@@ -76,3 +76,9 @@ export const YandexMetrikaContainer = ({ enabled = true }: Props) => {
     </>
   )
 }
+
+export const YandexMetrikaWrapper = () => (
+  <Suspense fallback={null}>
+    <YandexMetrikaContainer />
+  </Suspense>
+)
