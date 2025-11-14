@@ -16,6 +16,7 @@ import { Services } from './shared/collections/Services'
 
 import dotenv from 'dotenv'
 import { Banner } from './shared/collections/Banner'
+import { HomePage } from './shared/collections/HomePage'
 
 dotenv.config()
 
@@ -57,7 +58,7 @@ export default buildConfig({
     defaultLocale: 'ru',
   },
   collections: [Users, Media, Cases, Services, Banner],
-  globals: [About],
+  globals: [About, HomePage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

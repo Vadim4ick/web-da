@@ -92,9 +92,11 @@ export interface Config {
   };
   globals: {
     about: About;
+    homepage: Homepage;
   };
   globalsSelect: {
     about: AboutSelect<false> | AboutSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: 'en' | 'ru';
   user: User & {
@@ -465,6 +467,21 @@ export interface About {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  featuredCases?:
+    | {
+        case: number | Case;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
@@ -475,6 +492,21 @@ export interface AboutSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  featuredCases?:
+    | T
+    | {
+        case?: T;
         id?: T;
       };
   updatedAt?: T;
