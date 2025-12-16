@@ -121,6 +121,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <Providers>
         <body
+          translate="no"
           className={`${montserrat.variable} ${raleway.variable} ${roboto.variable} ${manrope.variable} flex h-full min-h-screen flex-col antialiased`}
         >
           <Header />
