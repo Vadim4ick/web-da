@@ -62,7 +62,7 @@ const AboutInfo = ({
             {advantages.title}
           </h3>
 
-          <div className="about-grid">
+          <div className="grid grid-cols-2 gap-6">
             {advantages.items.map((item) => (
               <article
                 key={item.id}
